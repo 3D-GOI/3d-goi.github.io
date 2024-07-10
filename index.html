@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- bulma css template -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <!-- ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+  <!-- The loading of KaTeX is deferred to speed up page rendering -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+  <title>
+    3D-GOI
+  </title>
+  <link rel="icon" href="favicon.ico">
+</head>
+<body>
+  <section class="section">
+
+  <div class="container has-text-centered">
+    <!-- paper title -->
+    <p class="title is-3"> 3D-GOI: 3D GAN Omni-Inversion for Multifaceted and Multi-object Editing </p>
+    <!-- publication -->
+    <p class="subtitle is-4"> ECCV 2024 </p>
+    <!-- authors -->
+    <p class="title is-5 mt-2"> 
+      <a href="https://github.com/Jahnsonblack/" target="_blank">Haoran Li</a><sup>1, 2</sup>, 
+      <a href="" target="_blank">Long Ma</a><sup>1, 2</sup>, 
+      <a href="https://i.4c43.work/" target="_blank">Haolin Shi</a><sup>1, 2</sup>, 
+      <a href="" target="_blank">Yanbin Hao</a><sup>1, 2</sup>, 
+      <a href="" target="_blank">Yong Liao</a><sup>1, 2</sup>, 
+      <a href="" target="_blank">Lechao Cheng</a><sup>3</sup>, 
+      <a href="https://pengyuan-zhou.github.io/" target="_blank">Pengyuan Zhou</a><sup>4</sup><sup>*</sup>
+    </p>
+    <!-- affiliations -->
+    <p class="subtitle is-5"> 
+      <sup>1</sup> University of Science and Technology of China &nbsp;
+      <sup>2</sup> CCCD Key Lab of Ministry of Culture and Tourism &nbsp;
+      <sup>3</sup> Hefei University of Technology &nbsp;
+      <sup>4</sup> Aarhus University &nbsp;
+    </p>
+
+    <!-- other links -->
+    <div class="is-flex is-justify-content-center">
+      <span class="icon-text mx-1">
+        <a class="button is-dark" href="https://arxiv.org/abs/2311.12050" role="button" target="_blank"> <span class="icon"> <ion-icon name="document-outline"></ion-icon> </span> <span> arXiv </span>  </a> 
+      </span>
+      <span class="icon-text mx-1">
+        <a class="button is-dark" href="https://github.com/3D-GOI/3D-GOI" role="button" target="_blank"> <span class="icon"> <ion-icon name="logo-github"></ion-icon> </span> <span> Code (Coming Soon) </span> </a> 
+      </span>
+    </div>
+  </div>
+
+  <!-- main container -->
+  <div class="container is-max-desktop has-text-centered">
+
+    <!-- abstract -->
+    <p class="title is-3 mt-5 has-text-centered"> Abstract </p>
+    <p class="content is-size-6 has-text-left">
+The current GAN inversion methods typically can only edit the appearance and shape of a single object and background while overlooking spatial information. 
+In this work, we propose a 3D editing framework, 3D-GOI, to enable multifaceted editing of affine information (scale, translation, and rotation) on multiple objects. 3D-GOI realizes the complex editing function by inverting the abundance of attribute codes (object shape/ appearance/ scale/ rotation/ translation, background shape/ appearance, and camera pose) controlled by GIRAFFE, a renowned 3D GAN. Accurately inverting all the codes is challenging, 3D-GOI solves this challenge following three main steps. First, we segment the objects and the background in a multi-object image. Second, we use a custom Neural Inversion Encoder to obtain coarse codes of each object. Finally, we use a round-robin optimization algorithm to get precise codes to reconstruct the image. To the best of our knowledge, 3D-GOI is the first framework to enable multifaceted editing on multiple objects. Both qualitative and quantitative experiments demonstrate that 3D-GOI holds immense potential for flexible, multifaceted editing in complex multi-object scenes.
+    </p>
+
+    <p class="title is-3 mt-5 has-text-centered"> Approach </p>
+    <a href="images/overview.png">
+      <img src="images/overview.png" alt="Approach of 3D-GOI"/>
+    </a>
+    <p class="content has-text-left is-size-6">
+The overall framework of 3D-GOI. As shown in the upper half, the encoders are trained on single-object scenes, each time using <math xmlns="http://www.w3.org/1998/Math/MathML" display=""><msub><mi>L</mi><mrow><mi>e</mi><mi>n</mi><mi>c</mi></mrow></msub></math> to predict one <math xmlns="http://www.w3.org/1998/Math/MathML" display=""><mi>w</mi><mo>,</mo><mi>w</mi><mo>∈</mo><mi>W</mi></math> , while other codes use real values. The lower half depicts the inversion process for the multi-object scene. We first decompose objects and background from the scene, then use the trained encoder to extract coarse codes, and finally use the round-robin optimization algorithm to obtain precise codes. The green blocks indicate required training and the yellow blocks indicate fixed parameters.
+    </p>
+    <!-- citation -->
+    <div class="card mt-4">
+      <header class="card-header">
+        <p class="card-header-title"> Citation </p>
+      </header>
+      <div class="card-content is-size-5 has-text-left">
+<pre><code>
+@article{li20233d,
+title={3D-GOI: 3D GAN Omni-Inversion for Multifaceted and Multi-object Editing},
+author={Li, Haoran and and Ma, Long and Shi, Haolin and Hao, Yanbin and Liao, Yong and Cheng, Lechao and Zhou, Pengyuan},
+journal={arXiv preprint arXiv:2311.12050},
+year={2023}
+}</code></pre>
+      </div>
+    </div>
+
+  </div>
+  </section>
+</body>
+</html>
